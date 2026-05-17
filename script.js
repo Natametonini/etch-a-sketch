@@ -1,19 +1,40 @@
-// Function to create the "board"
-function makeDivs(boardSize) {
-    const fullBoard = document.querySelector(".container");
+const fullBoard = document.querySelector(".container");
 
-    for (let i = 0; i < (boardSize * boardSize); i++) {
-        const div = document.createElement("div");
-        div.classList = "square";
-        fullBoard.appendChild(div);
-    }
+// Colorize each block
+function colorize() {
+    const squareArray = document.querySelectorAll(".square");
+
+    squareArray.forEach(square => {
+        square.addEventListener("mouseenter", () => {
+            square.style.backgroundColor = "black";
+        });
+    });
 }
 
-makeDivs(16);
+// Create the board
+function generateBoard(boardSize) {
 
-const squareArray = document.querySelectorAll(".square")
-squareArray.forEach(square => {
-    square.addEventListener("mouseenter", () => {
-        square.style.backgroundColor = "black";
-    })
-})
+    for (let i = 0; i < boardSize * boardSize; i++) {
+        const div = document.createElement("div");
+        div.classList.add("square");
+        fullBoard.appendChild(div);
+    }
+
+    colorize();
+}
+
+// Button to generate a customizable board
+const newBoardBtn = document.querySelector(".generateGrid");
+
+newBoardBtn.addEventListener("click", () => {
+    let userInput = prompt("Board Size: ");
+
+    // Remove old board
+    fullBoard.innerHTML = "";
+
+    // Generate new board
+    generateBoard(userInput);
+});
+
+// Base board
+generateBoard(16);
