@@ -47,8 +47,11 @@ newBoardBtn.addEventListener("click", () => {
     fullBoard.innerHTML = "";
 
     // Generate new board
-    if (userInput <= 100) generateBoard(userInput);
-    else generateBoard(16); return alert("Size too big!");
+    if (userInput > 100) {
+        generateBoard(16);
+        alert("Size too big!");
+    } 
+    generateBoard(userInput);
 
     makeBoardSquare(800, userInput);
 });
